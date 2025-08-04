@@ -1,0 +1,10 @@
+
+{
+  "name": "Aniversariantes ICM Campinas",
+  "short_name": "Aniversariantes ICM",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#006400",
+  "icons": []
+}
