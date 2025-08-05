@@ -1,0 +1,7 @@
+
+body { font-family: sans-serif; padding: 1rem; max-width: 600px; margin: auto; }
+input, select { display: block; margin: 0.5rem 0; width: 100%; padding: 0.5rem; }
+button { margin: 0.5rem 0.25rem; padding: 0.5rem 1rem; }
+.verde { background-color: #2ecc71; color: white; border: none; }
+li { margin-bottom: 0.5rem; }
+#aniversarioHoje { margin-top: 1rem; font-weight: bold; color: #e67e22; }
