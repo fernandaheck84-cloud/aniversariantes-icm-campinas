@@ -1,22 +1,19 @@
-self.addEventListener('install', function(e) {
-  console.log('Service Worker: Installed');
+
+self.addEventListener("install", e => {
   e.waitUntil(
-    caches.open('v1').then(function(cache) {
+    caches.open("aniversariantes-v1").then(cache => {
       return cache.addAll([
-        '/',
-        '/index.html',
-        '/style.css',
-        '/script.js',
-        '/manifest.json',
-        '/icon-192.png',
-        '/icon-512.png'
+        "index.html",
+        "style.css",
+        "script.js",
+        "manifest.json"
       ]);
     })
   );
 });
-self.addEventListener('fetch', function(e) {
+self.addEventListener("fetch", e => {
   e.respondWith(
-    caches.match(e.request).then(function(response) {
+    caches.match(e.request).then(response => {
       return response || fetch(e.request);
     })
   );

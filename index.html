@@ -1,20 +1,56 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aniversariantes ICM Campinas</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
 </head>
 <body>
   <h1>Aniversariantes ICM Campinas</h1>
-  <p>Seu app está funcionando!</p>
+  <form id="formulario">
+    <input type="text" id="nome" placeholder="Nome" required />
+    <input type="tel" id="telefone" placeholder="Telefone (somente números)" required />
+    <input type="date" id="data" required />
+    <select id="categoria">
+      <option value="irmã">Irmã</option>
+      <option value="irmão">Irmão</option>
+      <option value="pastor">Pastor</option>
+      <option value="diácono">Diácono</option>
+      <option value="bebê">Bebê</option>
+      <option value="pequeno">Pequeno</option>
+      <option value="pequena">Pequena</option>
+      <option value="intermediário">Intermediário</option>
+      <option value="intermediária">Intermediária</option>
+      <option value="adolescente">Adolescente</option>
+      <option value="jovem">Jovem</option>
+    </select>
+    <select id="sexo">
+      <option value="feminino">Feminino</option>
+      <option value="masculino">Masculino</option>
+    </select>
+    <button type="submit">Adicionar</button>
+  </form>
+  <div>
+    <select id="filtro-categoria">
+      <option value="">Todas categorias</option>
+      <option value="irmã">Irmã</option>
+      <option value="irmão">Irmão</option>
+      <option value="pastor">Pastor</option>
+      <option value="diácono">Diácono</option>
+      <option value="bebê">Bebê</option>
+      <option value="pequeno">Pequeno</option>
+      <option value="pequena">Pequena</option>
+      <option value="intermediário">Intermediário</option>
+      <option value="intermediária">Intermediária</option>
+      <option value="adolescente">Adolescente</option>
+      <option value="jovem">Jovem</option>
+    </select>
+    <button id="parabenizar">Parabenizar no WhatsApp</button>
+  </div>
+  <ul id="lista-aniversariantes"></ul>
 </body>
 </html>

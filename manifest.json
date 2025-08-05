@@ -1,10 +1,11 @@
+
 {
   "name": "Aniversariantes ICM Campinas",
-  "short_name": "ICM Campinas",
+  "short_name": "Aniversariantes",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
+  "description": "App para gerenciar aniversariantes da ICM Campinas",
   "icons": [
     {
       "src": "icon-192.png",
