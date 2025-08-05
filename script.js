@@ -1,1 +1,1 @@
-// JavaScript principal
+console.log("App carregado.");
