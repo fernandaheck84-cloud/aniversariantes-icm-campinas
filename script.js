@@ -49,11 +49,15 @@ document.getElementById("parabenizar").addEventListener("click", () => {
     alert("Ninguém faz aniversário hoje.");
     return;
   }
-  let msg = `Hoje temos ${aniversariantesHoje.length} aniversariante(s).\n`;
-  aniversariantesHoje.forEach(p => {
+  let msg = "A Paz do Senhor irmãos!\n\n";
+  msg += `*Hoje temos ${aniversariantesHoje.length} aniversariante(s)!*\n\n`;
+  aniversariantesHoje.forEach((p, idx) => {
     const artigo = p.sexo === "feminino" ? "Nossa" : "Nosso";
-    const categoriaFmt = `*_${p.categoria}_*`;
-    msg += `${artigo} ${categoriaFmt} ${p.nome} está completando mais um ano de vida. Clique abaixo para dar os parabéns: https://wa.me/55${p.telefone}\n`;
+    const categoriaFmt = `*${p.categoria}*`;
+    const nomeFmt = `*${p.nome}*`;
+    msg += `${artigo} ${categoriaFmt} ${nomeFmt} está completando mais um ano de vida. 🎉\n`;
+    msg += `Clique abaixo para dar os parabéns:\nhttps://wa.me/55${p.telefone}`;
+    if (idx < aniversariantesHoje.length - 1) msg += "\n\n";
   });
   const url = "https://wa.me/?text=" + encodeURIComponent(msg);
   window.open(url, "_blank");
