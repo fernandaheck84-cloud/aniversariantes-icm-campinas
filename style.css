@@ -1,0 +1,29 @@
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+form, div {
+  margin-bottom: 20px;
+}
+input, select, button {
+  margin: 5px;
+  padding: 10px;
+}
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  background: white;
+  margin: 5px 0;
+  padding: 10px;
+  border-left: 4px solid #3498db;
+}
