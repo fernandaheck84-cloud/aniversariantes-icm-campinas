@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("formulario");
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const nome = document.getElementById("nome").value.trim();
     const telefone = document.getElementById("telefone").value.trim();
     const aniversario = document.getElementById("aniversario").value;
@@ -18,7 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const dados = { nome, telefone, aniversario, categoria, sexo, acao: "adicionar" };
+    const dados = {
+      nome,
+      telefone,
+      aniversario,
+      categoria,
+      sexo,
+      acao: "adicionar"
+    };
 
     await fetch(SHEET_URL, {
       method: "POST",
@@ -41,6 +49,7 @@ async function carregarAniversariantes() {
   if (!listaDiv) return;
 
   listaDiv.innerHTML = "<p>Carregando aniversariantes...</p>";
+
   try {
     const response = await fetch(SHEET_URL);
     const dados = await response.json();
@@ -56,120 +65,40 @@ async function carregarAniversariantes() {
     let html = "";
     let aniversariantesHoje = [];
 
-    ordenados.forEach(pessoa => {
+    ordenados.forEach((pessoa) => {
       const [ano, mes, dia] = pessoa.aniversario.split("-");
       const primeiroNome = pessoa.nome.split(" ")[0];
       const categoriaFmt = pessoa.categoria;
       const artigo = pessoa.sexo === "feminino" ? "Nossa" : "Nosso";
 
+      const linha = `${artigo} <b><u>${categoriaFmt} ${primeiroNome}</u></b>`;
+
       if (parseInt(dia) === hojeDia && parseInt(mes) === hojeMes) {
-        aniversariantesHoje.push(`${artigo} <b><u>${categoriaFmt} ${primeiroNome}</u></b>`);
+        aniversariantesHoje.push(linha);
       }
 
-      html += `<li>${primeiroNome} (${categoriaFmt}) - ${dia}/${mes} - <a target="_blank" href="https://wa.me/55${pessoa.telefone}">WhatsApp</a></li>`;
+      html += `
+        <li>
+          ${primeiroNome} (${categoriaFmt}) - ${dia}/${mes}
+          <br>
+          <a target="_blank" href="https://wa.me/55${pessoa.telefone}">📱 Parabenizar no WhatsApp</a>
+        </li>
+      `;
     });
 
     if (aniversariantesHoje.length > 0) {
       const mensagem = aniversariantesHoje.length === 1
         ? `🎉 Hoje é o aniversário de ${aniversariantesHoje[0]}`
-        : `🎉 Hoje temos ${aniversariantesHoje.length} aniversariantes:<br>` +
-          aniversariantesHoje.map(p => `• ${p}`).join("<br>");
+        : `🎉 Hoje temos <b>${aniversariantesHoje.length}</b> aniversariantes:<br><br>` +
+          aniversariantesHoje.map(p => `• ${p}`).join("<br><br>");
+
       listaDiv.innerHTML = `<p>${mensagem}</p><ul>${html}</ul>`;
     } else {
       listaDiv.innerHTML = `<ul>${html}</ul>`;
     }
+
   } catch (e) {
     listaDiv.innerHTML = "<p>Erro ao carregar aniversariantes.</p>";
+    console.error("Erro:", e);
   }
-}document.addEventListener('DOMContentLoaded', function () {
-  const form = document.querySelector('form');
-  const nomeInput = document.getElementById('nome');
-  const telefoneInput = document.getElementById('telefone');
-  const dataInput = document.getElementById('data');
-  const categoriaInput = document.getElementById('categoria');
-  const lista = document.createElement('ul');
-
-  form.insertAdjacentElement('afterend', lista);
-
-  const aniversariantes = [];
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const nome = nomeInput.value.trim();
-    const telefone = telefoneInput.value.trim();
-    const data = dataInput.value;
-    const categoria = categoriaInput.value;
-
-    if (nome && telefone && data && categoria) {
-      aniversariantes.push({ nome, telefone, data, categoria });
-      atualizarLista();
-      form.reset();
-    }
-  });
-
-  function atualizarLista() {
-    lista.innerHTML = '';
-    aniversariantes.forEach((a, index) => {
-      const item = document.createElement('li');
-      item.textContent = `${a.nome} (${a.categoria}) - ${formatarData(a.data)} - ${a.telefone}`;
-      lista.appendChild(item);
-    });
-  }
-
-  function formatarData(dataStr) {
-    const [ano, mes, dia] = dataStr.split('-');
-    return `${dia}/${mes}/${ano}`;
-  }
-}document.addEventListener('DOMContentLoaded', function () {
-  const form = document.querySelector('form');
-  const nomeInput = document.getElementById('nome');
-  const telefoneInput = document.getElementById('telefone');
-  const dataInput = document.getElementById('data');
-  const categoriaInput = document.getElementById('categoria');
-  const lista = document.createElement('ul');
-
-  form.insertAdjacentElement('afterend', lista);
-
-  let aniversariantes = [];
-
-  // Carregar dados salvos do localStorage
-  if (localStorage.getItem('aniversariantes')) {
-    aniversariantes = JSON.parse(localStorage.getItem('aniversariantes'));
-    atualizarLista();
-  }
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const nome = nomeInput.value.trim();
-    const telefone = telefoneInput.value.trim();
-    const data = dataInput.value;
-    const categoria = categoriaInput.value;
-
-    if (nome && telefone && data && categoria) {
-      aniversariantes.push({ nome, telefone, data, categoria });
-      salvarLocalStorage();
-      atualizarLista();
-      form.reset();
-    }
-  });
-
-  function atualizarLista() {
-    lista.innerHTML = '';
-    aniversariantes.forEach((a) => {
-      const item = document.createElement('li');
-      item.textContent = `${a.nome} (${a.categoria}) - ${formatarData(a.data)} - ${a.telefone}`;
-      lista.appendChild(item);
-    });
-  }
-
-  function salvarLocalStorage() {
-    localStorage.setItem('aniversariantes', JSON.stringify(aniversariantes));
-  }
-
-  function formatarData(dataStr) {
-    const [ano, mes, dia] = dataStr.split('-');
-    return `${dia}/${mes}/${ano}`;
-  }
-});
+                  }
