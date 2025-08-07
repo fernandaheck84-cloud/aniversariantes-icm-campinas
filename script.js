@@ -81,4 +81,95 @@ async function carregarAniversariantes() {
   } catch (e) {
     listaDiv.innerHTML = "<p>Erro ao carregar aniversariantes.</p>";
   }
-}
+}document.addEventListener('DOMContentLoaded', function () {
+  const form = document.querySelector('form');
+  const nomeInput = document.getElementById('nome');
+  const telefoneInput = document.getElementById('telefone');
+  const dataInput = document.getElementById('data');
+  const categoriaInput = document.getElementById('categoria');
+  const lista = document.createElement('ul');
+
+  form.insertAdjacentElement('afterend', lista);
+
+  const aniversariantes = [];
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const nome = nomeInput.value.trim();
+    const telefone = telefoneInput.value.trim();
+    const data = dataInput.value;
+    const categoria = categoriaInput.value;
+
+    if (nome && telefone && data && categoria) {
+      aniversariantes.push({ nome, telefone, data, categoria });
+      atualizarLista();
+      form.reset();
+    }
+  });
+
+  function atualizarLista() {
+    lista.innerHTML = '';
+    aniversariantes.forEach((a, index) => {
+      const item = document.createElement('li');
+      item.textContent = `${a.nome} (${a.categoria}) - ${formatarData(a.data)} - ${a.telefone}`;
+      lista.appendChild(item);
+    });
+  }
+
+  function formatarData(dataStr) {
+    const [ano, mes, dia] = dataStr.split('-');
+    return `${dia}/${mes}/${ano}`;
+  }
+}document.addEventListener('DOMContentLoaded', function () {
+  const form = document.querySelector('form');
+  const nomeInput = document.getElementById('nome');
+  const telefoneInput = document.getElementById('telefone');
+  const dataInput = document.getElementById('data');
+  const categoriaInput = document.getElementById('categoria');
+  const lista = document.createElement('ul');
+
+  form.insertAdjacentElement('afterend', lista);
+
+  let aniversariantes = [];
+
+  // Carregar dados salvos do localStorage
+  if (localStorage.getItem('aniversariantes')) {
+    aniversariantes = JSON.parse(localStorage.getItem('aniversariantes'));
+    atualizarLista();
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const nome = nomeInput.value.trim();
+    const telefone = telefoneInput.value.trim();
+    const data = dataInput.value;
+    const categoria = categoriaInput.value;
+
+    if (nome && telefone && data && categoria) {
+      aniversariantes.push({ nome, telefone, data, categoria });
+      salvarLocalStorage();
+      atualizarLista();
+      form.reset();
+    }
+  });
+
+  function atualizarLista() {
+    lista.innerHTML = '';
+    aniversariantes.forEach((a) => {
+      const item = document.createElement('li');
+      item.textContent = `${a.nome} (${a.categoria}) - ${formatarData(a.data)} - ${a.telefone}`;
+      lista.appendChild(item);
+    });
+  }
+
+  function salvarLocalStorage() {
+    localStorage.setItem('aniversariantes', JSON.stringify(aniversariantes));
+  }
+
+  function formatarData(dataStr) {
+    const [ano, mes, dia] = dataStr.split('-');
+    return `${dia}/${mes}/${ano}`;
+  }
+});
