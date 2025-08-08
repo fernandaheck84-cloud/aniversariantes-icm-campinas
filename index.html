@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aniversariantes ICM Campinas</title>
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎂 Aniversariantes ICM Campinas</h1>
+      <div class="toolbar">
+        <button class="btn" id="btnHoje">Hoje (<span id="qtdHoje">0</span>)</button>
+        <button class="btn ghost" id="btnCopiar">Copiar mensagem</button>
+        <button class="btn secondary" id="btnShare">Compartilhar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row-3">
+        <div>
+          <label>Nome completo</label>
+          <input id="nome" placeholder="Ex: Fernanda Heck">
+        </div>
+        <div>
+          <label>Telefone (com DDI+DDD, só números)</label>
+          <input id="telefone" placeholder="Ex: 5511987654321">
+        </div>
+        <div>
+          <label>Data de nascimento</label>
+          <input id="data" type="date">
+        </div>
+      </div>
+      <div class="row" style="margin-top:12px;">
+        <div>
+          <label>Categoria</label>
+          <select id="categoria">
+            <option>Pastor</option>
+            <option>Diácono</option>
+            <option>Irmã</option>
+            <option>Irmão</option>
+            <option>Bebê</option>
+            <option>Pequeno</option>
+            <option>Pequena</option>
+            <option>Intermediário</option>
+            <option>Intermediária</option>
+            <option>Adolescente</option>
+            <option>Jovem</option>
+          </select>
+        </div>
+        <div>
+          <label>Filtrar por categoria</label>
+          <select id="filtro">
+            <option value="">Todas</option>
+            <option>Pastor</option>
+            <option>Diácono</option>
+            <option>Irmã</option>
+            <option>Irmão</option>
+            <option>Bebê</option>
+            <option>Pequeno</option>
+            <option>Pequena</option>
+            <option>Intermediário</option>
+            <option>Intermediária</option>
+            <option>Adolescente</option>
+            <option>Jovem</option>
+          </select>
+        </div>
+      </div>
+      <div class="toolbar" style="margin-top:12px;">
+        <button class="btn" id="btnAdd">Adicionar</button>
+        <button class="btn ghost" id="btnClear">Limpar formulário</button>
+      </div>
+      <div class="small" style="margin-top:8px;">
+        Observação: o WhatsApp não suporta <u>sublinhar</u> em mensagens. No texto gerado, usaremos <b>negrito</b> e <i>itálico</i> como alternativa.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="toolbar" style="justify-content: space-between;">
+        <div><b>Cadastro</b></div>
+        <div class="small"><span id="totalReg">0</span> pessoas cadastradas</div>
+      </div>
+      <div class="list" id="lista"></div>
+    </div>
+
+    <div class="footer">Funciona offline. Seus dados ficam salvos neste dispositivo.</div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js'));
+    }
+  </script>
+</body>
+</html>
