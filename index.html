@@ -1,0 +1,19 @@
+
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Aniversariantes</title><meta name="theme-color" content="#0ea5e9"><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="styles.css"></head>
+<body><div class="container">
+  <div class="header">
+    <h1>🎂 Aniversariantes</h1><p>ICM Campinas</p>
+    <div class="actions">
+      <button class="btn" id="btnHoje">Hoje (<span id="qtdHoje">0</span>)</button>
+      <button class="btn secondary" id="btnShare">Compartilhar</button>
+      <button class="btn" id="btnNotif">Ativar notificações</button>
+    </div>
+    <div class="toolbar">
+      <button class="btn ghost" id="btnCloud">Conectar à nuvem</button>
+      <span id="cloudStatus">Nuvem: desconectada</span>
+    </div>
+  </div>
+  <div class="card"><b>Cadastro (demo mínimo para pacote)</b></div>
+<script src="app.js?v=444"></script>
+<script>if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js'));}</script>
+</div></body></html>

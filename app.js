@@ -1,0 +1,2 @@
+
+(function(){ const btn=document.getElementById('btnCloud'); const s=document.getElementById('cloudStatus'); btn&&btn.addEventListener('click',async()=>{ const k=prompt('Digite sua ADMIN_KEY:'); if(!k){s.textContent='Nuvem: não conectado'; return;} try{ const r=await fetch('/.netlify/functions/cloud-load',{headers:{'x-admin-key':k}}); if(r.ok){ s.textContent='Nuvem: conectado ✓'; } else { s.textContent='Nuvem: erro'; } }catch(e){ s.textContent='Nuvem: erro'; } }); })();
